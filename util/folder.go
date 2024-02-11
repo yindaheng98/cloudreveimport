@@ -4,17 +4,23 @@ import (
 	model "github.com/cloudreve/Cloudreve/v3/models"
 )
 
-func GetFolderIDByPath(path []string, user model.User) (*model.Folder, error) {
+func GetFolderIDByPath(path []string, user model.User) (*model.Folder, uint, error) {
 	root, err := user.Root()
 	if err != nil {
-		return nil, err
+		return nil, 0, err
 	}
-	folder := root
-	for _, dirname := range path {
-		folder, err = folder.GetChild(dirname)
+	parent := root
+	for i, dirname := range path {
+		folder, err := parent.GetChild(dirname)
 		if err != nil {
-			return nil, err
+			folder.Name = dirname
+			folder.ParentID = &parent.ID
+			return folder, uint(i), err
 		}
+		parent = folder
 	}
-	return folder, nil
+	return parent, uint(len(path)), nil
+}
+
+func CreateFolderByPath(path []string, user model.User) {
 }

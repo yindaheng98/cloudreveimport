@@ -15,16 +15,27 @@ func Test_GetFolderIDByPath(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	folder, err := GetFolderIDByPath([]string{"www", "qqq"}, user)
+	folder, idx, err := GetFolderIDByPath([]string{"www", "qqq"}, user)
 	if err != nil {
 		t.Error(err)
 		return
 	}
+	t.Log(idx)
 	t.Log(folder)
-	folder, err = GetFolderIDByPath([]string{"www", "www"}, user)
+
+	folder, idx, err = GetFolderIDByPath([]string{"qqq", "www"}, user)
 	if err != nil {
-		t.Error(err)
-		return
+		t.Log(folder)
+		t.Log(err)
 	}
+	t.Log(idx)
+	t.Log(folder)
+
+	folder, idx, err = GetFolderIDByPath([]string{"www", "www"}, user)
+	if err != nil {
+		t.Log(folder)
+		t.Log(err)
+	}
+	t.Log(idx)
 	t.Log(folder)
 }
