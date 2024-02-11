@@ -39,3 +39,26 @@ func Test_GetFolderIDByPath(t *testing.T) {
 	t.Log(idx)
 	t.Log(folder)
 }
+
+func Test_CreateFolderByPath(t *testing.T) {
+	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\conf.ini")
+	model.Init()
+	user, err := model.GetUserByEmail("yindaheng98@gmail.com")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	folder, err := CreateFolderByPath([]string{"www", "qqq"}, user)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	t.Log(folder)
+
+	folder, err = CreateFolderByPath([]string{"qqq", "www"}, user)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	t.Log(folder)
+}
