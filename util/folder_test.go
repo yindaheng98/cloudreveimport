@@ -8,7 +8,7 @@ import (
 	"github.com/cloudreve/Cloudreve/v3/pkg/conf"
 )
 
-func Test_GetFolderIDByPath(t *testing.T) {
+func Test_GetFolderByPath(t *testing.T) {
 	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini")
 	model.Init()
 	user, err := model.GetUserByEmail("yindaheng98@gmail.com")
@@ -16,7 +16,7 @@ func Test_GetFolderIDByPath(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	folder, idx, err := GetFolderIDByPath([]string{"www", "qqq"}, user)
+	folder, idx, err := GetFolderByPath([]string{"www", "qqq"}, user)
 	if err != nil {
 		t.Error(err)
 		return
@@ -24,7 +24,7 @@ func Test_GetFolderIDByPath(t *testing.T) {
 	t.Log(idx)
 	t.Log(folder)
 
-	folder, idx, err = GetFolderIDByPath([]string{"qqq", "www"}, user)
+	folder, idx, err = GetFolderByPath([]string{"qqq", "www"}, user)
 	if err != nil {
 		t.Log(folder)
 		t.Log(err)
@@ -32,7 +32,7 @@ func Test_GetFolderIDByPath(t *testing.T) {
 	t.Log(idx)
 	t.Log(folder)
 
-	folder, idx, err = GetFolderIDByPath([]string{"www", "www"}, user)
+	folder, idx, err = GetFolderByPath([]string{"www", "www"}, user)
 	if err != nil {
 		t.Log(folder)
 		t.Log(err)
@@ -86,7 +86,7 @@ func Test_UpdateFolderTime(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	folder, _, err := GetFolderIDByPath([]string{"qqq", "www"}, user)
+	folder, _, err := GetFolderByPath([]string{"qqq", "www"}, user)
 	if err != nil {
 		t.Log(folder)
 		t.Log(err)

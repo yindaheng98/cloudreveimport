@@ -6,7 +6,7 @@ import (
 	model "github.com/cloudreve/Cloudreve/v3/models"
 )
 
-func GetFolderIDByPath(path []string, user model.User) (*model.Folder, uint, error) {
+func GetFolderByPath(path []string, user model.User) (*model.Folder, uint, error) {
 	root, err := user.Root()
 	if err != nil {
 		return nil, 0, err
@@ -23,7 +23,7 @@ func GetFolderIDByPath(path []string, user model.User) (*model.Folder, uint, err
 }
 
 func CreateFolderByPath(path []string, user model.User) (*model.Folder, error) {
-	parent, idx, err := GetFolderIDByPath(path, user)
+	parent, idx, err := GetFolderByPath(path, user)
 	if err != nil {
 		if err.Error() != "record not found" {
 			return nil, err

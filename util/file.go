@@ -8,7 +8,7 @@ import (
 )
 
 func GetFileByPath(path []string, user model.User) (*model.File, *model.Folder, uint, error) {
-	folder, idx, err := GetFolderIDByPath(path, user)
+	folder, idx, err := GetFolderByPath(path, user)
 	if err == nil {
 		return nil, folder, idx, errors.New("here is a folder")
 	}

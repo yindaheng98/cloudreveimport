@@ -14,7 +14,9 @@ func (i *Invoker) Invoke(v Command) {
 	case ImportFileCommand:
 		i.invokeImportFile(v)
 	case UpdateFileTimeCommand:
+		i.invokeUpdateFolderTime(v)
 	case UpdateFolderTimeCommand:
+		i.invokeUpdateFileTime(v)
 	default:
 		util.Log().Error("Unrecogenized command: %s", v.Command)
 	}
@@ -30,5 +32,47 @@ func (i *Invoker) invokeImportFile(v Command) {
 		}
 	} else {
 		util.Log().Info("new   %+v", v)
+	}
+}
+
+func (i *Invoker) invokeUpdateFolderTime(v Command) {
+	folder, _, err := GetFolderByPath(v.DstPath, i.User)
+	if err != nil {
+		util.Log().Error("not exists %s", v.DstPath)
+		return
+	}
+	ctime := folder.CreatedAt
+	mtime := folder.UpdatedAt
+	if v.CreatedAt.Unix() > 0 {
+		ctime = v.CreatedAt
+	}
+	if v.UpdatedAt.Unix() > 0 {
+		mtime = v.UpdatedAt
+	}
+	err = UpdateFolderTime(folder, ctime, mtime, nil)
+	if err != nil {
+		util.Log().Error("%+v %+v", err, v)
+		return
+	}
+}
+
+func (i *Invoker) invokeUpdateFileTime(v Command) {
+	file, _, _, err := GetFileByPath(v.DstPath, i.User)
+	if err != nil {
+		util.Log().Error("not exists %s", v.DstPath)
+		return
+	}
+	ctime := file.CreatedAt
+	mtime := file.UpdatedAt
+	if v.CreatedAt.Unix() > 0 {
+		ctime = v.CreatedAt
+	}
+	if v.UpdatedAt.Unix() > 0 {
+		mtime = v.UpdatedAt
+	}
+	err = UpdateFileTime(file, ctime, mtime, nil)
+	if err != nil {
+		util.Log().Error("%+v %+v", err, v)
+		return
 	}
 }
