@@ -2,6 +2,7 @@ package util
 
 import (
 	"errors"
+	"time"
 
 	model "github.com/cloudreve/Cloudreve/v3/models"
 )
@@ -45,4 +46,18 @@ func ImportFile(path []string, source string, user model.User) error {
 		}
 	}
 	return errors.New("file exists")
+}
+
+func UpdateFileTime(folder *model.File, ctime, mtime time.Time, dtime *time.Time) error {
+	var updates = map[string]interface{}{}
+	if folder.CreatedAt != ctime {
+		updates["created_at"] = ctime
+	}
+	if folder.UpdatedAt != mtime {
+		updates["updated_at"] = mtime
+	}
+	if folder.DeletedAt != dtime {
+		updates["deleted_at"] = dtime
+	}
+	return model.DB.Model(&model.File{}).Where("id = ?", folder.ID).Update(updates).Error
 }

@@ -2,6 +2,7 @@ package util
 
 import (
 	"testing"
+	"time"
 
 	model "github.com/cloudreve/Cloudreve/v3/models"
 	"github.com/cloudreve/Cloudreve/v3/pkg/conf"
@@ -46,5 +47,22 @@ func Test_ImportFile(t *testing.T) {
 	t.Log(err)
 
 	err = ImportFile([]string{"www", "ggg", "ggg", "iii.png"}, "/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg", user)
+	t.Log(err)
+}
+
+func Test_UpdateFileTime(t *testing.T) {
+	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini")
+	model.Init()
+	user, err := model.GetUserByEmail("yindaheng98@gmail.com")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	file, _, _, err := GetFileByPath([]string{"www", "qqq", "fff.png"}, user)
+	if err != nil {
+		t.Log(file)
+		t.Log(err)
+	}
+	err = UpdateFileTime(file, file.CreatedAt, time.Now(), nil)
 	t.Log(err)
 }
