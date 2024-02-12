@@ -34,6 +34,7 @@ func main() {
 		return
 	}
 	util.Log().Info(fmt.Sprintf("User: %+v\n", user))
+	invoker := ci.Invoker{User: user}
 	var reader io.Reader = bufio.NewReader(os.Stdin)
 	if dataPath != "-" {
 		file, err := os.Open(dataPath)
@@ -54,15 +55,6 @@ func main() {
 			continue
 		}
 		util.Log().Debug("%+v", v)
-		err = ci.ImportFile(v.DstPath, v.SourceName, user)
-		if err != nil {
-			if err.Error() == "file exists" {
-				util.Log().Debug("exists %+v", v)
-			} else {
-				util.Log().Info("error  %+v %+v", v, err)
-			}
-		} else {
-			util.Log().Info("new   %+v", v)
-		}
+		invoker.Invoke(*v)
 	}
 }

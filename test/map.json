@@ -1,8 +1,8 @@
-{"source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","hhh","iii.png"]}
-{"source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","iii","jjj.png"]}
-{"source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","jjj","kkk.png"]}
-{"source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","kkk","lll.png"]}
-{"source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","lll","mmm.png"]}
-{"source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","mmm","nnn.png"]}
-{"source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","nnn","ooo.png"]}
-{"source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","ooo","ppp.png"]}
+{"command":"ImportFile", "source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","hhh","iii.png"]}
+{"command":"ImportFile", "source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","iii","jjj.png"]}
+{"command":"ImportFile", "source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","jjj","kkk.png"]}
+{"command":"AAA", "source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","kkk","lll.png"]}
+{"command":"ImportFile", "source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","lll","mmm.png"]}
+{"command":"ImportFile", "source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","mmm","rrr.png"]}
+{"command":"ImportFile", "source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","nnn","qqq.png"]}
+{"command":"AAA", "source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","ooo","ppp.png"]}
