@@ -20,6 +20,7 @@
             "args": [
                 "-c", "D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini",
                 "-u", "yindaheng98@gmail.com",
+                "-m", "D:\\Documents\\MyPrograms\\cloudreveimport\\test\\map.json"
             ]
         }
     ]
