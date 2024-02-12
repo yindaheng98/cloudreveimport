@@ -26,19 +26,19 @@ func (i *Invoker) invokeImportFile(v Command) {
 	err := ImportFile(v.DstPath, v.SourceName, i.User)
 	if err != nil {
 		if err.Error() == "file exists" {
-			util.Log().Debug("exists %+v", v)
+			util.Log().Debug("file exists %+v", v)
 		} else {
 			util.Log().Info("error  %+v %+v", v, err)
 		}
 	} else {
-		util.Log().Info("new   %+v", v)
+		util.Log().Info("new file %+v", v)
 	}
 }
 
 func (i *Invoker) invokeUpdateFolderTime(v Command) {
 	folder, _, err := GetFolderByPath(v.DstPath, i.User)
 	if err != nil {
-		util.Log().Error("not exists %s", v.DstPath)
+		util.Log().Error("folder not exists %s", v.DstPath)
 		return
 	}
 	ctime := folder.CreatedAt
@@ -59,7 +59,7 @@ func (i *Invoker) invokeUpdateFolderTime(v Command) {
 func (i *Invoker) invokeUpdateFileTime(v Command) {
 	file, _, _, err := GetFileByPath(v.DstPath, i.User)
 	if err != nil {
-		util.Log().Error("not exists %s", v.DstPath)
+		util.Log().Error("file not exists %s", v.DstPath)
 		return
 	}
 	ctime := file.CreatedAt
