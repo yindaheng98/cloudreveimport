@@ -1,0 +1,1 @@
+cat ./test/map.json | ./cloudreveimport.exe -c D:/Documents/MyPrograms/cloudreveimport/test/conf.ini -u yindaheng98@gmail.com -m -

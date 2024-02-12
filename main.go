@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"io"
 	"os"
 
 	model "github.com/cloudreve/Cloudreve/v3/models"
@@ -33,14 +34,18 @@ func main() {
 		return
 	}
 	util.Log().Info(fmt.Sprintf("User: %+v\n", user))
-	file, err := os.Open(dataPath)
-	if err != nil {
-		util.Log().Error("%+v", err)
-		return
+	var reader io.Reader = bufio.NewReader(os.Stdin)
+	if dataPath != "-" {
+		file, err := os.Open(dataPath)
+		if err != nil {
+			util.Log().Error("%s %+v", dataPath, err)
+			return
+		}
+		defer file.Close()
+		reader = file
 	}
-	defer file.Close()
 
-	scanner := bufio.NewScanner(file)
+	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
 		data := scanner.Bytes()
 		v, err := ci.Unmarshal(data)
@@ -57,7 +62,7 @@ func main() {
 				util.Log().Info("error  %+v %+v", v, err)
 			}
 		} else {
-			util.Log().Info("done   %+v", v)
+			util.Log().Info("new   %+v", v)
 		}
 	}
 }
