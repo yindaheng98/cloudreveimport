@@ -2,6 +2,7 @@ package util
 
 import (
 	"testing"
+	"time"
 
 	model "github.com/cloudreve/Cloudreve/v3/models"
 	"github.com/cloudreve/Cloudreve/v3/pkg/conf"
@@ -75,4 +76,21 @@ func Test_CreateFolderByPath(t *testing.T) {
 		return
 	}
 	t.Log(folder)
+}
+
+func Test_UpdateFolderTime(t *testing.T) {
+	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini")
+	model.Init()
+	user, err := model.GetUserByEmail("yindaheng98@gmail.com")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	folder, _, err := GetFolderIDByPath([]string{"qqq", "www"}, user)
+	if err != nil {
+		t.Log(folder)
+		t.Log(err)
+	}
+	err = UpdateFolderTime(folder, folder.CreatedAt, time.Now(), nil)
+	t.Log(err)
 }

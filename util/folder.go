@@ -1,6 +1,8 @@
 package util
 
 import (
+	"time"
+
 	model "github.com/cloudreve/Cloudreve/v3/models"
 )
 
@@ -50,4 +52,18 @@ func CreateSubFolders(parent *model.Folder, path []string, user model.User) (*mo
 		parent = folder
 	}
 	return parent, nil
+}
+
+func UpdateFolderTime(folder *model.Folder, ctime, mtime time.Time, dtime *time.Time) error {
+	var updates = map[string]interface{}{}
+	if folder.CreatedAt != ctime {
+		updates["created_at"] = ctime
+	}
+	if folder.UpdatedAt != mtime {
+		updates["updated_at"] = mtime
+	}
+	if folder.DeletedAt != dtime {
+		updates["deleted_at"] = dtime
+	}
+	return model.DB.Model(&model.Folder{}).Where("id = ?", folder.ID).Update(updates).Error
 }
