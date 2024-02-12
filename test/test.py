@@ -6,8 +6,11 @@ invoker = Invoker(
     "-u", "yindaheng98@gmail.com",
     "-m", "-"
 )
-invoker.invoke(
-    command="AAA",
-    source_name="/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg",
-    dst_path=["www", "ggg", "ooo", "ppp.png"]
-)
+invoker.start()
+for i in range(10):
+    invoker.invoke(
+        command="AAA",
+        source_name="/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg",
+        dst_path=["www", "ggg", "ooo", f"{i}.png"]
+    )
+invoker.join()

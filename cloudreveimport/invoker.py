@@ -1,6 +1,6 @@
 import json
 import subprocess
-from multiprocessing import Process
+from threading import Thread
 
 
 def stdout_reader(process: subprocess.Popen):
@@ -8,6 +8,8 @@ def stdout_reader(process: subprocess.Popen):
         output = process.stdout.readline().decode('utf-8')
         if not output and process.poll() is not None:
             break
+        if len(output.strip()) <= 0:
+            continue
         print("stdout", output.strip())
 
 
@@ -16,6 +18,8 @@ def stderr_reader(process: subprocess.Popen):
         output = process.stderr.readline().decode('utf-8')
         if not output and process.poll() is not None:
             break
+        if len(output.strip()) <= 0:
+            continue
         print("stderr", output.strip())
 
 
@@ -28,9 +32,14 @@ class Invoker:
         self.stderr_reader = None
 
     def start(self):
-        self.process = subprocess.Popen(args=self.args, executable=self.executable, stdout=subprocess.PIPE)
-        self.stdout_reader = Process(target=stdout_reader, args=(self.process,))
-        self.stderr_reader = Process(target=stderr_reader, args=(self.process,))
+        self.process = subprocess.Popen(
+            args=[self.executable, *self.args],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+        self.stdout_reader = Thread(target=stdout_reader, args=(self.process,))
+        self.stderr_reader = Thread(target=stderr_reader, args=(self.process,))
         self.stdout_reader.start()
         self.stderr_reader.start()
 
@@ -38,10 +47,11 @@ class Invoker:
         if not self.process:
             print("not started")
             return
-        self.process.stdin.write(json.dumps({
+        data = json.dumps({
             **kwargs,
             "command": command
-        }))
+        })
+        self.process.stdin.write((data + "\n").encode("utf8"))
 
     def import_file(self, dst_path, src_name):
         self.invoke(command="ImportFile", dst_path=dst_path, src_name=src_name)
