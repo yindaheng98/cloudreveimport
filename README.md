@@ -15,10 +15,9 @@ pip install cloudreveimport
 import time
 from cloudreveimport import Invoker
 invoker = Invoker(
-    "path to execuatable file you just install by 'go install ...'",
-    "-c", "path to your conf.ini for your cloudreve",
-    "-u", "your email in cloudreve",
-    "-m", "-" # This means read commands from stdin
+    execuable="path to execuatable file you just install by 'go install ...'",
+    config="path to your conf.ini for your cloudreve",
+    email="your email in cloudreve"
 )
 invoker.start()
 invoker.import_file(

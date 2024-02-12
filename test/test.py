@@ -3,10 +3,9 @@ import time
 from cloudreveimport import Invoker
 
 invoker = Invoker(
-    "D:\\Documents\\MyPrograms\\cloudreveimport\\cloudreveimport.exe",
-    "-c", "D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini",
-    "-u", "yindaheng98@gmail.com",
-    "-m", "-"
+    executable="D:\\Documents\\MyPrograms\\cloudreveimport\\cloudreveimport.exe",
+    config="D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini",
+    email="yindaheng98@gmail.com",
 )
 invoker.start()
 for i in range(3):
