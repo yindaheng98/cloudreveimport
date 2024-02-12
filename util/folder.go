@@ -26,19 +26,28 @@ func CreateFolderByPath(path []string, user model.User) (*model.Folder, error) {
 		if err.Error() != "record not found" {
 			return nil, err
 		}
-		for i := int(idx); i < len(path); i++ {
-			folder := &model.Folder{
-				Name:     path[i],
-				OwnerID:  user.ID,
-				ParentID: &parent.ID,
-			}
-			folder.Name = path[i]
-			folder.ID, err = folder.Create()
-			if err != nil {
-				return nil, err
-			}
-			parent = folder
+		parent, err = CreateSubFolders(parent, path[idx:], user)
+		if err != nil {
+			return nil, err
 		}
+	}
+	return parent, nil
+}
+
+func CreateSubFolders(parent *model.Folder, path []string, user model.User) (*model.Folder, error) {
+	var err error
+	for i := 0; i < len(path); i++ {
+		folder := &model.Folder{
+			Name:     path[i],
+			OwnerID:  user.ID,
+			ParentID: &parent.ID,
+		}
+		folder.Name = path[i]
+		folder.ID, err = folder.Create()
+		if err != nil {
+			return nil, err
+		}
+		parent = folder
 	}
 	return parent, nil
 }

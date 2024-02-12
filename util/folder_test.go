@@ -69,7 +69,7 @@ func Test_CreateFolderByPath(t *testing.T) {
 	}
 	t.Log(folder)
 
-	folder, err = CreateFolderByPath([]string{"www", "www", "www", "www", "www"}, user)
+	folder, err = CreateFolderByPath([]string{"www", "www", "qqq", "qqq", "qqq"}, user)
 	if err != nil {
 		t.Error(err)
 		return
