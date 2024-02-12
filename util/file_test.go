@@ -27,3 +27,24 @@ func Test_GetFileByPath(t *testing.T) {
 	t.Log(idx)
 	t.Log(err)
 }
+
+func Test_ImportFile(t *testing.T) {
+	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\conf.ini")
+	model.Init()
+	user, err := model.GetUserByEmail("yindaheng98@gmail.com")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	err = ImportFile([]string{"www", "qqq"}, "/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg", user)
+	t.Log(err)
+
+	err = ImportFile([]string{"www", "qqq", "fff.png"}, "/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg", user)
+	t.Log(err)
+
+	err = ImportFile([]string{"www", "qqq", "iii.png"}, "/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg", user)
+	t.Log(err)
+
+	err = ImportFile([]string{"www", "ggg", "ggg", "iii.png"}, "/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg", user)
+	t.Log(err)
+}
