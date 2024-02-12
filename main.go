@@ -27,5 +27,5 @@ func main() {
 	if err != nil {
 		return
 	}
-	fmt.Printf("%v\n", user)
+	util.Log().Info(fmt.Sprintf("%v\n", user))
 }
