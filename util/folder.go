@@ -13,9 +13,7 @@ func GetFolderIDByPath(path []string, user model.User) (*model.Folder, uint, err
 	for i, dirname := range path {
 		folder, err := parent.GetChild(dirname)
 		if err != nil {
-			folder.Name = dirname
-			folder.ParentID = &parent.ID
-			return folder, uint(i), err
+			return parent, uint(i), err
 		}
 		parent = folder
 	}
@@ -31,9 +29,10 @@ func CreateFolderByPath(path []string, user model.User) (*model.Folder, error) {
 		for i := int(idx); i < len(path); i++ {
 			folder := &model.Folder{
 				Name:     path[i],
-				ParentID: &parent.ID,
 				OwnerID:  user.ID,
+				ParentID: &parent.ID,
 			}
+			folder.Name = path[i]
 			folder.ID, err = folder.Create()
 			if err != nil {
 				return nil, err
