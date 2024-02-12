@@ -8,7 +8,7 @@ import (
 )
 
 func Test_GetFileByPath(t *testing.T) {
-	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\conf.ini")
+	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini")
 	model.Init()
 	user, err := model.GetUserByEmail("yindaheng98@gmail.com")
 	if err != nil {
@@ -29,7 +29,7 @@ func Test_GetFileByPath(t *testing.T) {
 }
 
 func Test_ImportFile(t *testing.T) {
-	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\conf.ini")
+	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini")
 	model.Init()
 	user, err := model.GetUserByEmail("yindaheng98@gmail.com")
 	if err != nil {

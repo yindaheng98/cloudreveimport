@@ -18,7 +18,7 @@
             "mode": "auto",
             "program": "${workspaceFolder}",
             "args": [
-                "-c", "D:\\Documents\\MyPrograms\\cloudreveimport\\conf.ini",
+                "-c", "D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini",
                 "-u", "yindaheng98@gmail.com",
             ]
         }

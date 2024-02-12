@@ -8,7 +8,7 @@ import (
 )
 
 func Test_GetFolderIDByPath(t *testing.T) {
-	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\conf.ini")
+	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini")
 	model.Init()
 	user, err := model.GetUserByEmail("yindaheng98@gmail.com")
 	if err != nil {
@@ -41,7 +41,7 @@ func Test_GetFolderIDByPath(t *testing.T) {
 }
 
 func Test_CreateFolderByPath(t *testing.T) {
-	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\conf.ini")
+	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini")
 	model.Init()
 	user, err := model.GetUserByEmail("yindaheng98@gmail.com")
 	if err != nil {
