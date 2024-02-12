@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python invoker",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "test/test.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+        },
+        {
             "name": "Launch Package",
             "type": "go",
             "request": "launch",
@@ -18,9 +29,12 @@
             "mode": "auto",
             "program": "${workspaceFolder}",
             "args": [
-                "-c", "D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini",
-                "-u", "yindaheng98@gmail.com",
-                "-m", "D:\\Documents\\MyPrograms\\cloudreveimport\\test\\map.json"
+                "-c",
+                "D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini",
+                "-u",
+                "yindaheng98@gmail.com",
+                "-m",
+                "D:\\Documents\\MyPrograms\\cloudreveimport\\test\\map.json"
             ]
         }
     ]
