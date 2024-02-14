@@ -57,11 +57,21 @@ class Invoker:
     def import_file(self, dst_path, source_name):
         self.invoke(command="ImportFile", dst_path=dst_path, source_name=source_name)
 
-    def update_file_time(self, dst_path, ctime, mtime):
-        self.invoke(command="UpdateFileTime", dst_path=dst_path, created_at=ctime, updated_at=mtime)
+    def update_file_time(self, dst_path, mtime, ctime=None):
+        mtime = int(mtime)
+        if ctime:
+            ctime = int(ctime)
+            self.invoke(command="UpdateFileTime", dst_path=dst_path, updated_at=mtime, created_at=ctime)
+        else:
+            self.invoke(command="UpdateFileTime", dst_path=dst_path, updated_at=mtime)
 
-    def update_folder_time(self, dst_path, ctime, mtime):
-        self.invoke(command="UpdateFolderTime", dst_path=dst_path, created_at=ctime, updated_at=mtime)
+    def update_folder_time(self, dst_path, mtime, ctime=None):
+        mtime = int(mtime)
+        if ctime:
+            ctime = int(ctime)
+            self.invoke(command="UpdateFolderTime", dst_path=dst_path, updated_at=mtime, created_at=ctime)
+        else:
+            self.invoke(command="UpdateFolderTime", dst_path=dst_path, updated_at=mtime)
 
     def join(self):
         self.process.stdin.close()
