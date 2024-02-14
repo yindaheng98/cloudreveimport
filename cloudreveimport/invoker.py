@@ -49,7 +49,7 @@ class Invoker:
             print("not started")
             return
         data = json.dumps({
-            **kwargs,
+            **{k: v for k, v in kwargs.items() if v},
             "command": command
         })
         self.process.stdin.write((data + "\n").encode("utf8"))
@@ -57,21 +57,15 @@ class Invoker:
     def import_file(self, dst_path, source_name):
         self.invoke(command="ImportFile", dst_path=dst_path, source_name=source_name)
 
-    def update_file_time(self, dst_path, mtime, ctime=None):
-        mtime = int(mtime)
-        if ctime:
-            ctime = int(ctime)
-            self.invoke(command="UpdateFileTime", dst_path=dst_path, updated_at=mtime, created_at=ctime)
-        else:
-            self.invoke(command="UpdateFileTime", dst_path=dst_path, updated_at=mtime)
+    def update_file_time(self, dst_path, mtime=None, ctime=None):
+        mtime = int(mtime) if mtime else mtime
+        ctime = int(ctime) if ctime else ctime
+        self.invoke(command="UpdateFileTime", dst_path=dst_path, updated_at=mtime, created_at=ctime)
 
-    def update_folder_time(self, dst_path, mtime, ctime=None):
-        mtime = int(mtime)
-        if ctime:
-            ctime = int(ctime)
-            self.invoke(command="UpdateFolderTime", dst_path=dst_path, updated_at=mtime, created_at=ctime)
-        else:
-            self.invoke(command="UpdateFolderTime", dst_path=dst_path, updated_at=mtime)
+    def update_folder_time(self, dst_path, mtime=None, ctime=None):
+        mtime = int(mtime) if mtime else mtime
+        ctime = int(ctime) if ctime else ctime
+        self.invoke(command="UpdateFolderTime", dst_path=dst_path, updated_at=mtime, created_at=ctime)
 
     def join(self):
         self.process.stdin.close()

@@ -21,17 +21,22 @@ invoker.import_file(
 )
 invoker.update_file_time(
     dst_path=["www", "ggg", "ooo", f"{k}.png"],
-    ctime=int(time.time()),
-    mtime=int(time.time()-100),
+    ctime=0,
+    mtime=int(time.time()-30*24*3600),
 )
 invoker.update_folder_time(
     dst_path=["www", "ggg", "ooo", f"{k}.png"],
-    ctime=int(time.time()),
-    mtime=int(time.time()-100),
+    ctime=0,
+    mtime=int(time.time()-30*24*3600),
 )
 invoker.update_folder_time(
     dst_path=["www", "ggg", "ooo"],
-    ctime=int(time.time()),
-    mtime=int(time.time()-100),
+    ctime=0,
+    mtime=int(time.time()-30*24*3600),
+)
+invoker.update_folder_time(
+    dst_path=["groups"],
+    ctime=int(time.time()-30*24*3600), # it works
+    mtime=int(time.time()-30*24*3600), # not works
 )
 invoker.join()
