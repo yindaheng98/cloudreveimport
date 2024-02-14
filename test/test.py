@@ -37,6 +37,6 @@ invoker.update_folder_time(
 invoker.update_folder_time(
     dst_path=["groups"],
     ctime=int(time.time()-30*24*3600), # it works
-    mtime=int(time.time()-30*24*3600), # not works
+    mtime=int(time.time()-30*24*3600), # it works!
 )
 invoker.join()

@@ -65,5 +65,5 @@ func UpdateFolderTime(folder *model.Folder, ctime, mtime time.Time, dtime *time.
 	if folder.DeletedAt != dtime {
 		updates["deleted_at"] = dtime
 	}
-	return model.DB.Model(&model.Folder{}).Where("id = ?", folder.ID).Update(updates).Error
+	return model.DB.Model(&model.Folder{}).Where("id = ?", folder.ID).UpdateColumns(updates).Error
 }

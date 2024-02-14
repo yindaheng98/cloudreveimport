@@ -59,5 +59,5 @@ func UpdateFileTime(folder *model.File, ctime, mtime time.Time, dtime *time.Time
 	if folder.DeletedAt != dtime {
 		updates["deleted_at"] = dtime
 	}
-	return model.DB.Model(&model.File{}).Where("id = ?", folder.ID).Update(updates).Error
+	return model.DB.Model(&model.File{}).Where("id = ?", folder.ID).UpdateColumns(updates).Error
 }
