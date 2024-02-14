@@ -14,11 +14,11 @@ func (i *Invoker) Invoke(v Command) {
 	case ImportFileCommand:
 		i.invokeImportFile(v)
 	case UpdateFileTimeCommand:
-		i.invokeUpdateFolderTime(v)
-	case UpdateFolderTimeCommand:
 		i.invokeUpdateFileTime(v)
+	case UpdateFolderTimeCommand:
+		i.invokeUpdateFolderTime(v)
 	default:
-		util.Log().Error("Unrecogenized command: %s", v.Command)
+		util.Log().Error("Unrecogenized command: %+v", v)
 	}
 }
 
@@ -28,7 +28,7 @@ func (i *Invoker) invokeImportFile(v Command) {
 		if err.Error() == "file exists" {
 			util.Log().Debug("file exists %+v", v)
 		} else {
-			util.Log().Info("error  %+v %+v", v, err)
+			util.Log().Error("error  %+v %+v", v, err)
 		}
 	} else {
 		util.Log().Info("new file %+v", v)
@@ -38,7 +38,11 @@ func (i *Invoker) invokeImportFile(v Command) {
 func (i *Invoker) invokeUpdateFolderTime(v Command) {
 	folder, _, err := GetFolderByPath(v.DstPath, i.User)
 	if err != nil {
-		util.Log().Error("folder not exists %s", v.DstPath)
+		if err.Error() == "record not found" {
+			util.Log().Error("folder not exists %+v", v)
+		} else {
+			util.Log().Error("error  %+v %+v", v, err)
+		}
 		return
 	}
 	ctime := folder.CreatedAt
@@ -52,14 +56,19 @@ func (i *Invoker) invokeUpdateFolderTime(v Command) {
 	err = UpdateFolderTime(folder, ctime, mtime, nil)
 	if err != nil {
 		util.Log().Error("%+v %+v", err, v)
-		return
+	} else {
+		util.Log().Info("folder time updated %+v", v)
 	}
 }
 
 func (i *Invoker) invokeUpdateFileTime(v Command) {
 	file, _, _, err := GetFileByPath(v.DstPath, i.User)
 	if err != nil {
-		util.Log().Error("file not exists %s", v.DstPath)
+		if err.Error() == "record not found" {
+			util.Log().Error("file not exists %+v", v)
+		} else {
+			util.Log().Error("error  %+v %+v", v, err)
+		}
 		return
 	}
 	ctime := file.CreatedAt
@@ -73,6 +82,7 @@ func (i *Invoker) invokeUpdateFileTime(v Command) {
 	err = UpdateFileTime(file, ctime, mtime, nil)
 	if err != nil {
 		util.Log().Error("%+v %+v", err, v)
-		return
+	} else {
+		util.Log().Info("file time updated %+v", v)
 	}
 }
