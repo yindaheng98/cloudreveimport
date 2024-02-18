@@ -7,7 +7,7 @@ import (
 
 const (
 	ImportFileCommand       = "ImportFile"
-	UpdateFileTimeCommand   = "UpdateFileTime"
+	UpdateFileStatCommand   = "UpdateFileStat"
 	UpdateFolderTimeCommand = "UpdateFolderTime"
 )
 

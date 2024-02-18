@@ -25,7 +25,7 @@ invoker.import_file(
     dst_path=["path", "you", "want", "to", "import", "to", "in", "cloudreve"],
     size=100, # Bytes
 )
-invoker.update_file_time(
+invoker.update_file_stat(
     dst_path=["path", "to", "file", "in", "cloudreve"],
     ctime=int(time.time()), # created time
     mtime=int(time.time()), # updated time

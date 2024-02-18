@@ -5,6 +5,6 @@
 {"command":"ImportFile", "source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","lll","mmm.png"]}
 {"command":"UpdateFolderTime", "updated_at":1707713776,"dst_path":["www","ggg","mmm","rrr.png"]}
 {"command":"UpdateFolderTime", "updated_at":1707713776,"dst_path":["www","ggg","mmm"]}
-{"command":"UpdateFileTime", "create_at":1707713776, "dst_path":["www","ggg","nnn"]}
-{"command":"UpdateFileTime", "create_at":1707713776, "dst_path":["www","ggg","nnn","qqq.png"]}
+{"command":"UpdateFileStat", "create_at":1707713776, "dst_path":["www","ggg","nnn"]}
+{"command":"UpdateFileStat", "create_at":1707713776, "dst_path":["www","ggg","nnn","qqq.png"]}
 {"command":"AAA", "source_name":"/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg","dst_path":["www","ggg","ooo","ppp.png"]}

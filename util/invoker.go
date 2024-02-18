@@ -13,8 +13,8 @@ func (i *Invoker) Invoke(v Command) {
 	switch v.Command {
 	case ImportFileCommand:
 		i.invokeImportFile(v)
-	case UpdateFileTimeCommand:
-		i.invokeUpdateFileTime(v)
+	case UpdateFileStatCommand:
+		i.invokeUpdateFileStat(v)
 	case UpdateFolderTimeCommand:
 		i.invokeUpdateFolderTime(v)
 	default:
@@ -61,7 +61,7 @@ func (i *Invoker) invokeUpdateFolderTime(v Command) {
 	}
 }
 
-func (i *Invoker) invokeUpdateFileTime(v Command) {
+func (i *Invoker) invokeUpdateFileStat(v Command) {
 	file, _, _, err := GetFileByPath(v.DstPath, i.User)
 	if err != nil {
 		if err.Error() == "record not found" {
@@ -83,7 +83,7 @@ func (i *Invoker) invokeUpdateFileTime(v Command) {
 	if v.Size > 0 {
 		size = v.Size
 	}
-	err = UpdateFileTime(file, ctime, mtime, nil, size)
+	err = UpdateFileStat(file, ctime, mtime, nil, size)
 	if err != nil {
 		util.Log().Error("%+v %+v", err, v)
 	} else {

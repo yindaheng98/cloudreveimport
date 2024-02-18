@@ -50,7 +50,7 @@ func Test_ImportFile(t *testing.T) {
 	t.Log(err)
 }
 
-func Test_UpdateFileTime(t *testing.T) {
+func Test_UpdateFileStat(t *testing.T) {
 	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini")
 	model.Init()
 	user, err := model.GetUserByEmail("yindaheng98@gmail.com")
@@ -63,6 +63,6 @@ func Test_UpdateFileTime(t *testing.T) {
 		t.Log(file)
 		t.Log(err)
 	}
-	err = UpdateFileTime(file, file.CreatedAt, time.Now(), nil, 12)
+	err = UpdateFileStat(file, file.CreatedAt, time.Now(), nil, 12)
 	t.Log(err)
 }

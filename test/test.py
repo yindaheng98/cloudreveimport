@@ -20,7 +20,7 @@ invoker.import_file(
     dst_path=["www", "ggg", "ooo", f"{k}.png"],
     size=100
 )
-invoker.update_file_time(
+invoker.update_file_stat(
     dst_path=["www", "ggg", "ooo", f"{k}.png"],
     ctime=0,
     mtime=int(time.time()-30*24*3600),

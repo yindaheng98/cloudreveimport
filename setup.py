@@ -12,7 +12,7 @@ package_dir = {
 
 setup(
     name='cloudreveimport',
-    version='0.0.9',
+    version='1.0',
     author='yindaheng98',
     author_email='yindaheng98@gmail.com',
     url='https://github.com/yindaheng98/cloudreveimport',

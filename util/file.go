@@ -49,7 +49,7 @@ func ImportFile(path []string, source string, size uint64, user model.User) erro
 	return errors.New("file exists")
 }
 
-func UpdateFileTime(file *model.File, ctime, mtime time.Time, dtime *time.Time, size uint64) error {
+func UpdateFileStat(file *model.File, ctime, mtime time.Time, dtime *time.Time, size uint64) error {
 	var updates = map[string]interface{}{}
 	if file.CreatedAt != ctime {
 		updates["created_at"] = ctime
