@@ -17,6 +17,7 @@ type Command struct {
 	DstPath            []string  `json:"dst_path"`
 	CreatedAtTimestamp int64     `json:"created_at"`
 	UpdatedAtTimestamp int64     `json:"updated_at"`
+	Size               uint64    `json:"size"`
 	CreatedAt          time.Time `json:"-"`
 	UpdatedAt          time.Time `json:"-"`
 }

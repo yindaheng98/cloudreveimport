@@ -48,16 +48,19 @@ func ImportFile(path []string, source string, user model.User) error {
 	return errors.New("file exists")
 }
 
-func UpdateFileTime(folder *model.File, ctime, mtime time.Time, dtime *time.Time) error {
+func UpdateFileTime(file *model.File, ctime, mtime time.Time, dtime *time.Time, size uint64) error {
 	var updates = map[string]interface{}{}
-	if folder.CreatedAt != ctime {
+	if file.CreatedAt != ctime {
 		updates["created_at"] = ctime
 	}
-	if folder.UpdatedAt != mtime {
+	if file.UpdatedAt != mtime {
 		updates["updated_at"] = mtime
 	}
-	if folder.DeletedAt != dtime {
+	if file.DeletedAt != dtime {
 		updates["deleted_at"] = dtime
 	}
-	return model.DB.Model(&model.File{}).Where("id = ?", folder.ID).UpdateColumns(updates).Error
+	if file.Size != size {
+		updates["size"] = size
+	}
+	return model.DB.Model(&model.File{}).Where("id = ?", file.ID).UpdateColumns(updates).Error
 }

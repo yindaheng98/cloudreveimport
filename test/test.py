@@ -23,6 +23,7 @@ invoker.update_file_time(
     dst_path=["www", "ggg", "ooo", f"{k}.png"],
     ctime=0,
     mtime=int(time.time()-30*24*3600),
+    size=100
 )
 invoker.update_folder_time(
     dst_path=["www", "ggg", "ooo", f"{k}.png"],

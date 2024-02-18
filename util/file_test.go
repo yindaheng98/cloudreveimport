@@ -63,6 +63,6 @@ func Test_UpdateFileTime(t *testing.T) {
 		t.Log(file)
 		t.Log(err)
 	}
-	err = UpdateFileTime(file, file.CreatedAt, time.Now(), nil)
+	err = UpdateFileTime(file, file.CreatedAt, time.Now(), nil, 12)
 	t.Log(err)
 }

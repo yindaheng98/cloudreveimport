@@ -57,10 +57,10 @@ class Invoker:
     def import_file(self, dst_path, source_name):
         self.invoke(command="ImportFile", dst_path=dst_path, source_name=source_name)
 
-    def update_file_time(self, dst_path, mtime=None, ctime=None):
+    def update_file_time(self, dst_path, mtime=None, ctime=None, size=0):
         mtime = int(mtime) if mtime else mtime
         ctime = int(ctime) if ctime else ctime
-        self.invoke(command="UpdateFileTime", dst_path=dst_path, updated_at=mtime, created_at=ctime)
+        self.invoke(command="UpdateFileTime", dst_path=dst_path, updated_at=mtime, created_at=ctime, size=size)
 
     def update_folder_time(self, dst_path, mtime=None, ctime=None):
         mtime = int(mtime) if mtime else mtime

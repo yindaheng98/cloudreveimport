@@ -79,7 +79,11 @@ func (i *Invoker) invokeUpdateFileTime(v Command) {
 	if v.UpdatedAt.Unix() > 0 {
 		mtime = v.UpdatedAt
 	}
-	err = UpdateFileTime(file, ctime, mtime, nil)
+	size := file.Size
+	if v.Size > 0 {
+		size = v.Size
+	}
+	err = UpdateFileTime(file, ctime, mtime, nil, size)
 	if err != nil {
 		util.Log().Error("%+v %+v", err, v)
 	} else {
