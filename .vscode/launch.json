@@ -16,13 +16,6 @@
             }
         },
         {
-            "name": "Launch Package",
-            "type": "go",
-            "request": "launch",
-            "mode": "auto",
-            "program": "${fileDirname}"
-        },
-        {
             "name": "Launch Main",
             "type": "go",
             "request": "launch",
@@ -34,7 +27,9 @@
                 "-u",
                 "yindaheng98@gmail.com",
                 "-m",
-                "D:\\Documents\\MyPrograms\\cloudreveimport\\test\\map.json"
+                "D:\\Downloads\\test",
+                "-t",
+                "abc"
             ]
         }
     ]

@@ -20,7 +20,9 @@ Usage of D:\Documents\MyPrograms\cloudreveimport\cloudreveimport.exe:
   -c string
         Path to the config file. (default "D:\\Documents\\MyPrograms\\cloudreveimport\\conf.ini")
   -m string
-        Map of files to be imported.
+        A folder to be imported.
+  -t string
+        Import the folder to which folder in cloudreve.
   -u string
         Email of the target user. (default "admin@cloudreve.org")
 ```
@@ -32,6 +34,23 @@ pip install cloudreveimport
 ```
 
 ## Usage
+
+### Command line
+
+Just run it in the device where the Cloudreve is installed:
+
+Assume your Cloudreve config file is `/root/conf.ini`, and you want to import a folder `/mnt/gallery` into the user `me@cloudreve.org`'s `my/gallery` folder in Cloudreve.
+Just run:
+
+```sh
+./cloudreveimport -c "/root/conf.ini" -u "me@cloudreve.org" -m "/mnt/gallery" -t "my/gallery"
+```
+
+Then open `me@cloudreve.org`'s `my/gallery` folder in Cloudreve, and you will see those files in `/mnt/gallery` here.
+
+### Python
+
+Or you can write your scripts in Python:
 
 ```python
 import time
