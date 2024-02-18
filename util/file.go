@@ -65,3 +65,7 @@ func UpdateFileStat(file *model.File, ctime, mtime time.Time, dtime *time.Time, 
 	}
 	return model.DB.Model(&model.File{}).Where("id = ?", file.ID).UpdateColumns(updates).Error
 }
+
+func DeleteFile(file *model.File) error {
+	return model.DB.Unscoped().Delete(file, file.ID).Error
+}

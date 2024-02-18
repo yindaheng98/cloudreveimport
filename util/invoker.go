@@ -13,6 +13,8 @@ func (i *Invoker) Invoke(v Command) {
 	switch v.Command {
 	case ImportFileCommand:
 		i.invokeImportFile(v)
+	case DeleteFileCommand:
+		i.invokeDeleteFile(v)
 	case UpdateFileStatCommand:
 		i.invokeUpdateFileStat(v)
 	case UpdateFolderTimeCommand:
@@ -32,6 +34,24 @@ func (i *Invoker) invokeImportFile(v Command) {
 		}
 	} else {
 		util.Log().Info("new file %+v", v)
+	}
+}
+
+func (i *Invoker) invokeDeleteFile(v Command) {
+	file, _, _, err := GetFileByPath(v.DstPath, i.User)
+	if err != nil {
+		if err.Error() == "record not found" {
+			util.Log().Error("file not exists %+v", v)
+		} else {
+			util.Log().Error("error  %+v %+v", v, err)
+		}
+		return
+	}
+	err = DeleteFile(file)
+	if err != nil {
+		util.Log().Error("error  %+v %+v", v, err)
+	} else {
+		util.Log().Info("deleted file %+v", v)
 	}
 }
 

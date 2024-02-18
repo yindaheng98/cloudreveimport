@@ -41,4 +41,10 @@ invoker.update_folder_time(
     ctime=int(time.time()-30*24*3600), # it works
     mtime=int(time.time()-30*24*3600), # it works!
 )
+invoker.delete_file(
+    dst_path=["www", "ggg", "ooo", f"{k}.png"]
+)
+invoker.delete_file(
+    dst_path=["www", "ggg", "ooo", f"{k}.png"]
+)
 invoker.join()

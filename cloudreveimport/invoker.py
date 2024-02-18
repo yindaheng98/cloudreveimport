@@ -57,6 +57,9 @@ class Invoker:
     def import_file(self, dst_path, source_name, size=0):
         self.invoke(command="ImportFile", dst_path=dst_path, source_name=source_name, size=size)
 
+    def delete_file(self, dst_path):
+        self.invoke(command="DeleteFile", dst_path=dst_path)
+
     def update_file_stat(self, dst_path, mtime=None, ctime=None, size=0):
         mtime = int(mtime) if mtime else mtime
         ctime = int(ctime) if ctime else ctime

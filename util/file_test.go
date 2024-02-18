@@ -66,3 +66,24 @@ func Test_UpdateFileStat(t *testing.T) {
 	err = UpdateFileStat(file, file.CreatedAt, time.Now(), nil, 12)
 	t.Log(err)
 }
+
+func Test_DeleteFile(t *testing.T) {
+	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini")
+	model.Init()
+	user, err := model.GetUserByEmail("yindaheng98@gmail.com")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	err = ImportFile([]string{"www", "qqq", "fff.png"}, "/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg", 111, user)
+	t.Log(err)
+	file, _, _, err := GetFileByPath([]string{"www", "qqq", "fff.png"}, user)
+	if err != nil {
+		t.Log(file)
+		t.Log(err)
+	}
+	err = DeleteFile(file)
+	t.Log(err)
+	err = DeleteFile(file)
+	t.Log(err)
+}
