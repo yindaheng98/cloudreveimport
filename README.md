@@ -45,13 +45,13 @@ invoker.start()
 invoker.import_file(
     source_name="path to the file on your disk",
     dst_path=["path", "you", "want", "to", "import", "to", "in", "cloudreve"],
-    size=100, # Bytes
+    size=100, # filesize in Bytes
 )
 invoker.update_file_stat(
     dst_path=["path", "to", "file", "in", "cloudreve"],
     ctime=int(time.time()), # created time
     mtime=int(time.time()), # updated time
-    size=100, # Bytes
+    size=100, # filesize in Bytes
 )
 invoker.delete_file(
     dst_path=["path", "to", "file", "in", "cloudreve"],
@@ -62,3 +62,5 @@ invoker.update_folder_time(
     mtime=int(time.time()), # updated time
 )
 ```
+
+Note: 上述文件操作是直接对数据库进行修改，会导致用户已用空间与实际不符，所以在完成文件的导入或文件大小修改后需要执行数据库脚本[校准用户容量](https://docs.cloudreve.org/v/en/manage/db-script#xiao-zhun-yong-hu-rong-liang)。
