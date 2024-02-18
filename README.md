@@ -22,12 +22,14 @@ invoker = Invoker(
 invoker.start()
 invoker.import_file(
     source_name="path to the file on your disk",
-    dst_path=["path", "you", "want", "to", "import", "to", "in", "cloudreve"]
+    dst_path=["path", "you", "want", "to", "import", "to", "in", "cloudreve"],
+    size=100, # Bytes
 )
 invoker.update_file_time(
     dst_path=["path", "to", "file", "in", "cloudreve"],
     ctime=int(time.time()), # created time
     mtime=int(time.time()), # updated time
+    size=100, # Bytes
 )
 invoker.update_folder_time(
     dst_path=["path", "to", "folder", "in", "cloudreve"],

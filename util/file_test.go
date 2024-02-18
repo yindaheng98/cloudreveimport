@@ -37,16 +37,16 @@ func Test_ImportFile(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	err = ImportFile([]string{"www", "qqq"}, "/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg", user)
+	err = ImportFile([]string{"www", "qqq"}, "/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg", 222, user)
 	t.Log(err)
 
-	err = ImportFile([]string{"www", "qqq", "fff.png"}, "/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg", user)
+	err = ImportFile([]string{"www", "qqq", "fff.png"}, "/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg", 222, user)
 	t.Log(err)
 
-	err = ImportFile([]string{"www", "qqq", "iii.png"}, "/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg", user)
+	err = ImportFile([]string{"www", "qqq", "iii.png"}, "/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg", 333, user)
 	t.Log(err)
 
-	err = ImportFile([]string{"www", "ggg", "ggg", "iii.png"}, "/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg", user)
+	err = ImportFile([]string{"www", "ggg", "ggg", "iii.png"}, "/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg", 444, user)
 	t.Log(err)
 }
 

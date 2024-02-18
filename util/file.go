@@ -22,7 +22,7 @@ func GetFileByPath(path []string, user model.User) (*model.File, *model.Folder, 
 	return nil, folder, idx, err
 }
 
-func ImportFile(path []string, source string, user model.User) error {
+func ImportFile(path []string, source string, size uint64, user model.User) error {
 	file, folder, idx, err := GetFileByPath(path, user)
 	if err != nil {
 		if err.Error() == "here is a folder" {
@@ -38,6 +38,7 @@ func ImportFile(path []string, source string, user model.User) error {
 			file = &model.File{
 				Name:       path[len(path)-1],
 				SourceName: source,
+				Size:       size,
 				UserID:     user.ID,
 				FolderID:   folder.ID,
 				PolicyID:   user.Policy.ID,

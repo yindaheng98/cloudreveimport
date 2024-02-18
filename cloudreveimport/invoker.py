@@ -54,8 +54,8 @@ class Invoker:
         })
         self.process.stdin.write((data + "\n").encode("utf8"))
 
-    def import_file(self, dst_path, source_name):
-        self.invoke(command="ImportFile", dst_path=dst_path, source_name=source_name)
+    def import_file(self, dst_path, source_name, size=0):
+        self.invoke(command="ImportFile", dst_path=dst_path, source_name=source_name, size=size)
 
     def update_file_time(self, dst_path, mtime=None, ctime=None, size=0):
         mtime = int(mtime) if mtime else mtime

@@ -23,7 +23,7 @@ func (i *Invoker) Invoke(v Command) {
 }
 
 func (i *Invoker) invokeImportFile(v Command) {
-	err := ImportFile(v.DstPath, v.SourceName, i.User)
+	err := ImportFile(v.DstPath, v.SourceName, v.Size, i.User)
 	if err != nil {
 		if err.Error() == "file exists" {
 			util.Log().Debug("file exists %+v", v)

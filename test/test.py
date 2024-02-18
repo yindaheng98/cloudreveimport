@@ -17,7 +17,8 @@ for i in range(3):
 k = random.randint(1, 1000)
 invoker.import_file(
     source_name="/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg",
-    dst_path=["www", "ggg", "ooo", f"{k}.png"]
+    dst_path=["www", "ggg", "ooo", f"{k}.png"],
+    size=100
 )
 invoker.update_file_time(
     dst_path=["www", "ggg", "ooo", f"{k}.png"],
