@@ -6,9 +6,10 @@ invoker = Invoker(
     executable="D:\\Documents\\MyPrograms\\cloudreveimport\\cloudreveimport.exe",
     config="D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini",
     email="yindaheng98@gmail.com",
+    restart_interval=0.1
 )
 invoker.start()
-for i in range(3):
+for i in range(300):
     invoker.invoke(
         command="AAA",
         source_name="/gallery/data/twitter/eumi_114/1426380913575743488_1.jpg",

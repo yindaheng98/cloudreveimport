@@ -1,4 +1,5 @@
 import json
+import time
 import subprocess
 from threading import Thread
 
@@ -24,13 +25,15 @@ def stderr_reader(process: subprocess.Popen):
 
 
 class Invoker:
-    def __init__(self, executable, config, email):
+    def __init__(self, executable, config, email, restart_interval=None):
         self.executable = executable
         self.config = config
         self.email = email
         self.process = None
         self.stdout_reader = None
         self.stderr_reader = None
+        self.restart_interval = restart_interval
+        self._current_time = 0
 
     def start(self):
         self.process = subprocess.Popen(
@@ -43,6 +46,7 @@ class Invoker:
         self.stderr_reader = Thread(target=stderr_reader, args=(self.process,))
         self.stdout_reader.start()
         self.stderr_reader.start()
+        self._current_time = time.time()
 
     def invoke(self, command, **kwargs):
         if not self.process:
@@ -53,6 +57,11 @@ class Invoker:
             "command": command
         })
         self.process.stdin.write((data + "\n").encode("utf8"))
+        if self.restart_interval:
+            current_time = time.time()
+            if current_time-self._current_time > self.restart_interval:
+                self.join()
+                self.start()
 
     def import_file(self, dst_path, source_name, size=0):
         self.invoke(command="ImportFile", dst_path=dst_path, source_name=source_name, size=size)
