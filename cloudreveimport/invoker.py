@@ -25,19 +25,20 @@ def stderr_reader(process: subprocess.Popen):
 
 
 class Invoker:
-    def __init__(self, executable, config, email, restart_interval=None):
+    def __init__(self, executable, config, email, loglevel="info", restart_interval=None):
         self.executable = executable
         self.config = config
         self.email = email
         self.process = None
         self.stdout_reader = None
         self.stderr_reader = None
+        self.loglevel = loglevel
         self.restart_interval = restart_interval
         self._current_time = 0
 
     def start(self):
         self.process = subprocess.Popen(
-            args=[self.executable, "-c", self.config, "-u", self.email, "-m", "-"],
+            args=[self.executable, "-c", self.config, "-u", self.email, "-v", self.loglevel, "-m", "-"],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE

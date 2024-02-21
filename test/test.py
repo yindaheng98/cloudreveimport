@@ -6,7 +6,8 @@ invoker = Invoker(
     executable="D:\\Documents\\MyPrograms\\cloudreveimport\\cloudreveimport.exe",
     config="D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini",
     email="yindaheng98@gmail.com",
-    restart_interval=0.1
+    restart_interval=0.1,
+    loglevel="debug"
 )
 invoker.start()
 for i in range(300):

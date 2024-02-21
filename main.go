@@ -20,6 +20,7 @@ var (
 	userName string
 	confPath string
 	dataPath string
+	logLevel string
 )
 
 func init() {
@@ -27,12 +28,14 @@ func init() {
 	flag.StringVar(&userName, "u", "admin@cloudreve.org", "Email of the target user.")
 	flag.StringVar(&dataPath, "m", "", "A folder to be imported.")
 	flag.StringVar(&dataPath, "t", "", "Import the folder to which folder in cloudreve.")
+	flag.StringVar(&logLevel, "v", "info", "Log level.")
 	flag.Parse()
 	conf.Init(confPath)
 	model.Init()
 }
 
 func main() {
+	util.BuildLogger(logLevel)
 	user, err := model.GetUserByEmail(userName)
 	if err != nil {
 		return
