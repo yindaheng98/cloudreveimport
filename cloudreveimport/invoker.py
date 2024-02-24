@@ -2,30 +2,33 @@ import json
 import time
 import subprocess
 from threading import Thread
+import logging
+logging.basicConfig(level=logging.INFO)
 
 
-def stdout_reader(process: subprocess.Popen):
+def stdout_reader(process: subprocess.Popen, logger: logging.Logger):
     while True:
         output = process.stdout.readline().decode('utf-8')
         if not output and process.poll() is not None:
             break
         if len(output.strip()) <= 0:
             continue
-        print("stdout", output.strip())
+        logger.info("stdout " + output.strip())
 
 
-def stderr_reader(process: subprocess.Popen):
+def stderr_reader(process: subprocess.Popen, logger: logging.Logger):
     while True:
         output = process.stderr.readline().decode('utf-8')
         if not output and process.poll() is not None:
             break
         if len(output.strip()) <= 0:
             continue
-        print("stderr", output.strip())
+        logger.info("stderr " + output.strip())
 
 
 class Invoker:
-    def __init__(self, executable, config, email, loglevel="info", restart_interval=None):
+    def __init__(self, executable, config, email, loglevel="info", restart_interval=None,
+                 logger=logging.getLogger(name="cloudreveimport")):
         self.executable = executable
         self.config = config
         self.email = email
@@ -35,6 +38,7 @@ class Invoker:
         self.loglevel = loglevel
         self.restart_interval = restart_interval
         self._current_time = 0
+        self.logger = logger
 
     def start(self):
         self.process = subprocess.Popen(
@@ -43,15 +47,15 @@ class Invoker:
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
         )
-        self.stdout_reader = Thread(target=stdout_reader, args=(self.process,))
-        self.stderr_reader = Thread(target=stderr_reader, args=(self.process,))
+        self.stdout_reader = Thread(target=stdout_reader, args=(self.process, self.logger))
+        self.stderr_reader = Thread(target=stderr_reader, args=(self.process, self.logger))
         self.stdout_reader.start()
         self.stderr_reader.start()
         self._current_time = time.time()
 
     def invoke(self, command, **kwargs):
         if not self.process:
-            print("not started")
+            self.logger.info("cloudreveimport program not started")
             return
         data = json.dumps({
             **{k: v for k, v in kwargs.items() if v},
