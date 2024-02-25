@@ -7,6 +7,7 @@ invoker = Invoker(
     config="D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini",
     email="yindaheng98@gmail.com",
     restart_interval=0.1,
+    join_timeout=0.1,
     loglevel="debug"
 )
 invoker.start()

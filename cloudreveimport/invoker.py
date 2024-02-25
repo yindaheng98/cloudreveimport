@@ -27,7 +27,8 @@ def stderr_reader(process: subprocess.Popen, logger: logging.Logger):
 
 
 class Invoker:
-    def __init__(self, executable, config, email, loglevel="info", restart_interval=None,
+    def __init__(self, executable, config, email, loglevel="info",
+                 restart_interval=None, join_timeout=None,
                  logger=logging.getLogger(name="cloudreveimport")):
         self.executable = executable
         self.config = config
@@ -37,6 +38,7 @@ class Invoker:
         self.stderr_reader = None
         self.loglevel = loglevel
         self.restart_interval = restart_interval
+        self.join_timeout = join_timeout
         self._current_time = 0
         self.logger = logger
 
@@ -86,8 +88,8 @@ class Invoker:
 
     def join(self):
         self.process.stdin.close()
-        self.stdout_reader.join()
-        self.stderr_reader.join()
+        self.stdout_reader.join(timeout=self.join_timeout)
+        self.stderr_reader.join(timeout=self.join_timeout)
         self.process.kill()
         self.process = None
         self.stdout_reader = None
