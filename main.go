@@ -40,7 +40,7 @@ func main() {
 	if err != nil {
 		return
 	}
-	util.Log().Info(fmt.Sprintf("User: %+v\n", user))
+	util.Log().Debug(fmt.Sprintf("User: %+v\n", user))
 	invoker := ci.Invoker{User: user}
 	if dataPath == "-" {
 		import_from_stdin(invoker)
