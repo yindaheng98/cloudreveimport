@@ -87,6 +87,8 @@ class Invoker:
         self.invoke(command="UpdateFolderTime", dst_path=dst_path, updated_at=mtime, created_at=ctime)
 
     def join(self):
+        if not self.process:
+            return
         self.process.stdin.close()
         self.stdout_reader.join(timeout=self.join_timeout)
         self.stderr_reader.join(timeout=self.join_timeout)
