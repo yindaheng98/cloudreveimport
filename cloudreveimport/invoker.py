@@ -56,11 +56,9 @@ class Invoker:
         self._current_time = time.time()
 
     def invoke(self, command, **kwargs):
-        if self.process is None:
-            self.start()
         if not self.process:
-            self.logger.info("cloudreveimport program not started")
-            return
+            self.logger.info("cloudreveimport program not started, now start it")
+            self.start()
         data = json.dumps({
             **{k: v for k, v in kwargs.items() if v},
             "command": command
