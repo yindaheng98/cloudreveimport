@@ -92,7 +92,10 @@ class Invoker:
         self.process.stdin.close()
         self.stdout_reader.join(timeout=self.join_timeout)
         self.stderr_reader.join(timeout=self.join_timeout)
-        self.process.kill()
+        try:
+            self.process.wait(timeout=self.join_timeout)
+        except subprocess.TimeoutExpired:
+            self.process.kill()
         self.process = None
         self.stdout_reader = None
         self.stderr_reader = None
