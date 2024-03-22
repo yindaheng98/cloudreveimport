@@ -35,7 +35,7 @@ func (i *Invoker) invokeImportFile(v Command) {
 			util.Log().Error("error  %+v %+v", v, err)
 		}
 	} else {
-		util.Log().Info("new file %+v", v)
+		util.Log().Info("new file %+v %+v %+v", v.DstPath, v.SourceName, v.Size)
 	}
 }
 
@@ -53,7 +53,7 @@ func (i *Invoker) invokeDeleteFile(v Command) {
 	if err != nil {
 		util.Log().Error("error  %+v %+v", v, err)
 	} else {
-		util.Log().Info("deleted file %+v", v)
+		util.Log().Info("deleted file %+v", v.DstPath)
 	}
 }
 
@@ -79,7 +79,7 @@ func (i *Invoker) invokeUpdateFolderTime(v Command) {
 	if err != nil {
 		util.Log().Error("%+v %+v", err, v)
 	} else {
-		util.Log().Info("folder time updated %+v", v)
+		util.Log().Info("folder time updated %+v %+v %+v", folder, ctime, mtime)
 	}
 }
 
@@ -109,7 +109,7 @@ func (i *Invoker) invokeUpdateFileStat(v Command) {
 	if err != nil {
 		util.Log().Error("%+v %+v", err, v)
 	} else {
-		util.Log().Info("file stat updated %+v", v)
+		util.Log().Info("file stat updated %+v %+v %+v", ctime, mtime, size)
 	}
 }
 
@@ -127,6 +127,6 @@ func (i *Invoker) invokeUpdateFileMeta(v Command) {
 	if err != nil {
 		util.Log().Error("%+v %+v", err, v)
 	} else {
-		util.Log().Info("file meta updated %+v", v)
+		util.Log().Info("file meta updated %+v", v.Metadata)
 	}
 }
