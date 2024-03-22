@@ -67,6 +67,23 @@ func Test_UpdateFileStat(t *testing.T) {
 	t.Log(err)
 }
 
+func Test_UpdateFileMeta(t *testing.T) {
+	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini")
+	model.Init()
+	user, err := model.GetUserByEmail("yindaheng98@gmail.com")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	file, _, _, err := GetFileByPath([]string{"www", "qqq", "fff.png"}, user)
+	if err != nil {
+		t.Log(file)
+		t.Log(err)
+	}
+	err = UpdateFileMeta(file, map[string]string{"thumb_sidecar": "true", "thumb_status": "exist"})
+	t.Log(err)
+}
+
 func Test_DeleteFile(t *testing.T) {
 	conf.Init("D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini")
 	model.Init()

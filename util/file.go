@@ -66,6 +66,16 @@ func UpdateFileStat(file *model.File, ctime, mtime time.Time, dtime *time.Time, 
 	return model.DB.Model(&model.File{}).Where("id = ?", file.ID).UpdateColumns(updates).Error
 }
 
+func UpdateFileMeta(file *model.File, metadata map[string]string) error {
+	for key, value := range metadata {
+		file.MetadataSerialized[key] = value
+	}
+	if err := file.BeforeSave(); err != nil {
+		return err
+	}
+	return model.DB.Model(&model.File{}).Where("id = ?", file.ID).UpdateColumns(map[string]string{"metadata": file.Metadata}).Error
+}
+
 func DeleteFile(file *model.File) error {
 	return model.DB.Unscoped().Delete(file, file.ID).Error
 }
