@@ -7,7 +7,7 @@ invoker = Invoker(
     config="D:\\Documents\\MyPrograms\\cloudreveimport\\test\\conf.ini",
     email="yindaheng98@gmail.com",
     restart_interval=0.1,
-    join_timeout=0.1,
+    join_timeout=1,
     loglevel="debug"
 )
 invoker.start()
@@ -28,6 +28,10 @@ invoker.update_file_stat(
     ctime=0,
     mtime=int(time.time()-30*24*3600),
     size=100
+)
+invoker.update_file_meta(
+    dst_path=["www", "ggg", "ooo", f"{k}.png"],
+    thumb_sidecar="true", thumb_status="exist"
 )
 invoker.update_folder_time(
     dst_path=["www", "ggg", "ooo", f"{k}.png"],

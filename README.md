@@ -81,6 +81,11 @@ invoker.update_file_stat(
     mtime=int(time.time()), # updated time
     size=100, # filesize in Bytes
 )
+invoker.update_file_meta(
+    dst_path=["path", "to", "file", "in", "cloudreve"],
+    thumb_sidecar="true",
+    thumb_status="exist"
+)
 invoker.delete_file(
     dst_path=["path", "to", "file", "in", "cloudreve"],
 )

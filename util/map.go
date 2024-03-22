@@ -9,18 +9,20 @@ const (
 	ImportFileCommand       = "ImportFile"
 	DeleteFileCommand       = "DeleteFile"
 	UpdateFileStatCommand   = "UpdateFileStat"
+	UpdateFileMetaCommand   = "UpdateFileMeta"
 	UpdateFolderTimeCommand = "UpdateFolderTime"
 )
 
 type Command struct {
-	Command            string    `json:"command"`
-	SourceName         string    `json:"source_name"`
-	DstPath            []string  `json:"dst_path"`
-	CreatedAtTimestamp int64     `json:"created_at"`
-	UpdatedAtTimestamp int64     `json:"updated_at"`
-	Size               uint64    `json:"size"`
-	CreatedAt          time.Time `json:"-"`
-	UpdatedAt          time.Time `json:"-"`
+	Command            string            `json:"command"`
+	SourceName         string            `json:"source_name"`
+	DstPath            []string          `json:"dst_path"`
+	CreatedAtTimestamp int64             `json:"created_at"`
+	UpdatedAtTimestamp int64             `json:"updated_at"`
+	Size               uint64            `json:"size"`
+	Metadata           map[string]string `json:"metadata"`
+	CreatedAt          time.Time         `json:"-"`
+	UpdatedAt          time.Time         `json:"-"`
 }
 
 func max(a, b int64) int64 {

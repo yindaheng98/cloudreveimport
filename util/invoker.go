@@ -17,6 +17,8 @@ func (i *Invoker) Invoke(v Command) {
 		i.invokeDeleteFile(v)
 	case UpdateFileStatCommand:
 		i.invokeUpdateFileStat(v)
+	case UpdateFileMetaCommand:
+		i.invokeUpdateFileMeta(v)
 	case UpdateFolderTimeCommand:
 		i.invokeUpdateFolderTime(v)
 	default:
@@ -107,6 +109,24 @@ func (i *Invoker) invokeUpdateFileStat(v Command) {
 	if err != nil {
 		util.Log().Error("%+v %+v", err, v)
 	} else {
-		util.Log().Info("file time updated %+v", v)
+		util.Log().Info("file stat updated %+v", v)
+	}
+}
+
+func (i *Invoker) invokeUpdateFileMeta(v Command) {
+	file, _, _, err := GetFileByPath(v.DstPath, i.User)
+	if err != nil {
+		if err.Error() == "record not found" {
+			util.Log().Error("file not exists %+v", v)
+		} else {
+			util.Log().Error("error  %+v %+v", v, err)
+		}
+		return
+	}
+	err = UpdateFileMeta(file, v.Metadata)
+	if err != nil {
+		util.Log().Error("%+v %+v", err, v)
+	} else {
+		util.Log().Info("file meta updated %+v", v)
 	}
 }

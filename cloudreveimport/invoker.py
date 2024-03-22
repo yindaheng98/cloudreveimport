@@ -81,6 +81,9 @@ class Invoker:
         ctime = int(ctime) if ctime else ctime
         self.invoke(command="UpdateFileStat", dst_path=dst_path, updated_at=mtime, created_at=ctime, size=size)
 
+    def update_file_meta(self, dst_path, **kwargs):
+        self.invoke(command="UpdateFileMeta", dst_path=dst_path, metadata=kwargs)
+
     def update_folder_time(self, dst_path, mtime=None, ctime=None):
         mtime = int(mtime) if mtime else mtime
         ctime = int(ctime) if ctime else ctime
