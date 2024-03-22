@@ -79,7 +79,7 @@ func (i *Invoker) invokeUpdateFolderTime(v Command) {
 	if err != nil {
 		util.Log().Error("%+v %+v", err, v)
 	} else {
-		util.Log().Info("folder time updated %+v %+v %+v", folder, ctime, mtime)
+		util.Log().Info("folder time updated %+v %+v %+v", v.DstPath, ctime, mtime)
 	}
 }
 
@@ -109,7 +109,7 @@ func (i *Invoker) invokeUpdateFileStat(v Command) {
 	if err != nil {
 		util.Log().Error("%+v %+v", err, v)
 	} else {
-		util.Log().Info("file stat updated %+v %+v %+v", ctime, mtime, size)
+		util.Log().Info("file stat updated %+v %+v %+v %+v", v.DstPath, ctime, mtime, size)
 	}
 }
 
@@ -127,6 +127,6 @@ func (i *Invoker) invokeUpdateFileMeta(v Command) {
 	if err != nil {
 		util.Log().Error("%+v %+v", err, v)
 	} else {
-		util.Log().Info("file meta updated %+v", v.Metadata)
+		util.Log().Info("file meta updated %+v %+v", v.DstPath, v.Metadata)
 	}
 }
