@@ -76,10 +76,10 @@ class Invoker:
     def delete_file(self, dst_path):
         self.invoke(command="DeleteFile", dst_path=dst_path)
 
-    def update_file_stat(self, dst_path, mtime=None, ctime=None, size=0):
+    def update_file_stat(self, dst_path, mtime=None, ctime=None, size=0, source_name=None):
         mtime = int(mtime) if mtime else mtime
         ctime = int(ctime) if ctime else ctime
-        self.invoke(command="UpdateFileStat", dst_path=dst_path, updated_at=mtime, created_at=ctime, size=size)
+        self.invoke(command="UpdateFileStat", dst_path=dst_path, updated_at=mtime, created_at=ctime, size=size, source_name=source_name)
 
     def update_file_meta(self, dst_path, **kwargs):
         self.invoke(command="UpdateFileMeta", dst_path=dst_path, metadata=kwargs)

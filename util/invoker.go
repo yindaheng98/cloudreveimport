@@ -105,11 +105,15 @@ func (i *Invoker) invokeUpdateFileStat(v Command) {
 	if v.Size > 0 {
 		size = v.Size
 	}
-	err = UpdateFileStat(file, ctime, mtime, nil, size)
+	source_name := file.SourceName
+	if v.SourceName != "" {
+		source_name = v.SourceName
+	}
+	err = UpdateFileStat(file, ctime, mtime, nil, size, source_name)
 	if err != nil {
 		util.Log().Error("%+v %+v", err, v)
 	} else {
-		util.Log().Info("file stat updated %+v %+v %+v %+v", v.DstPath, ctime, mtime, size)
+		util.Log().Info("file stat updated %+v %+v %+v %+v %+v", v.DstPath, ctime, mtime, size, source_name)
 	}
 }
 

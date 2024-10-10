@@ -49,7 +49,7 @@ func ImportFile(path []string, source string, size uint64, user model.User) erro
 	return errors.New("file exists")
 }
 
-func UpdateFileStat(file *model.File, ctime, mtime time.Time, dtime *time.Time, size uint64) error {
+func UpdateFileStat(file *model.File, ctime, mtime time.Time, dtime *time.Time, size uint64, source_name string) error {
 	var updates = map[string]interface{}{}
 	if file.CreatedAt != ctime {
 		updates["created_at"] = ctime
@@ -62,6 +62,9 @@ func UpdateFileStat(file *model.File, ctime, mtime time.Time, dtime *time.Time, 
 	}
 	if file.Size != size {
 		updates["size"] = size
+	}
+	if file.SourceName != source_name {
+		updates["source_name"] = source_name
 	}
 	return model.DB.Model(&model.File{}).Where("id = ?", file.ID).UpdateColumns(updates).Error
 }

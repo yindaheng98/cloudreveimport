@@ -63,7 +63,7 @@ func Test_UpdateFileStat(t *testing.T) {
 		t.Log(file)
 		t.Log(err)
 	}
-	err = UpdateFileStat(file, file.CreatedAt, time.Now(), nil, 12)
+	err = UpdateFileStat(file, file.CreatedAt, time.Now(), nil, 12, "/gallery/fake/path.fake")
 	t.Log(err)
 }
 
@@ -103,4 +103,12 @@ func Test_DeleteFile(t *testing.T) {
 	t.Log(err)
 	err = DeleteFile(file)
 	t.Log(err)
+	file, _, _, err = GetFileByPath([]string{"www", "qqq"}, user)
+	err = DeleteFile(file)
+	file, _, _, err = GetFileByPath([]string{"www", "qqq", "fff.png"}, user)
+	err = DeleteFile(file)
+	file, _, _, err = GetFileByPath([]string{"www", "qqq", "iii.png"}, user)
+	err = DeleteFile(file)
+	file, _, _, err = GetFileByPath([]string{"www", "qqq", "ggg", "iii.png"}, user)
+	err = DeleteFile(file)
 }

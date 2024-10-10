@@ -27,7 +27,8 @@ invoker.update_file_stat(
     dst_path=["www", "ggg", "ooo", f"{k}.png"],
     ctime=0,
     mtime=int(time.time()-30*24*3600),
-    size=100
+    size=100,
+    source_name="/fake/path.fake"
 )
 invoker.update_file_meta(
     dst_path=["www", "ggg", "ooo", f"{k}.png"],
